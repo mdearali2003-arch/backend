@@ -3,6 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Article = void 0;
 // src/app/modules/article/article.model.ts
 const mongoose_1 = require("mongoose");
+// export interface IArticle {
+//   title: string;
+//   content: string;
+//   image?: string;
+//   status: "draft" | "published";
+//   createdAt: Date;
+//   updatedAt: Date;
+// }
 const articleSchema = new mongoose_1.Schema({
     title: {
         type: String,
@@ -13,6 +21,7 @@ const articleSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
+    image: { type: String },
     status: {
         type: String,
         enum: ["draft", "published"],

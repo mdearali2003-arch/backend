@@ -22,10 +22,24 @@ const deleteVideo = async (id) => {
     const result = await video_model_1.Video.findByIdAndDelete(id);
     return result;
 };
+const getVideosByCategory = async (category) => {
+    const validCategories = [
+        "personal development",
+        "business & entrepreneurship",
+        "financial literacy",
+        "podcast",
+    ];
+    if (!validCategories.includes(category)) {
+        throw new Error("Invalid category");
+    }
+    const result = await video_model_1.Video.find({ category });
+    return result;
+};
 exports.VideoService = {
     createVideo,
     getAllVideos,
     getVideoById,
     updateVideo,
     deleteVideo,
+    getVideosByCategory,
 };

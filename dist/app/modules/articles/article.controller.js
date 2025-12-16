@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateArticle = exports.UpdateStatusArticle = exports.deleteArticle = exports.getArticleById = exports.getAllPublishedArticles = exports.getAllArticles = exports.publishArticle = exports.saveDraft = void 0;
+exports.uploadArticleImage = exports.updateArticle = exports.UpdateStatusArticle = exports.deleteArticle = exports.getArticleById = exports.getAllPublishedArticles = exports.getAllArticles = exports.publishArticle = exports.saveDraft = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
@@ -83,5 +83,18 @@ exports.updateArticle = (0, catchAsync_1.default)(async (req, res) => {
         success: !!deleted,
         message: "Article Status Update successfully",
         data: null,
+    });
+});
+exports.uploadArticleImage = (0, catchAsync_1.default)(async (req, res) => {
+    const { id } = req.params;
+    if (!req.file)
+        throw new Error("No file uploaded");
+    const imagePath = `/uploads/${req.file.filename}`;
+    const result = await article_service_1.ArticleService.uploadImage(id, imagePath);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: "Image uploaded successfully",
+        data: result,
     });
 });

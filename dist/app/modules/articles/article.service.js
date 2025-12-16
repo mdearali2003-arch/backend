@@ -45,6 +45,9 @@ const UpdateStatusArticle = async (id) => {
     const result = await article_model_1.Article.findByIdAndUpdate(id, { status: "published" }, { new: true, runValidators: true });
     return result;
 };
+const uploadImage = async (id, imagePath) => {
+    return await article_model_1.Article.findByIdAndUpdate(id, { image: imagePath }, { new: true });
+};
 exports.ArticleService = {
     saveDraft,
     publishArticle,
@@ -54,4 +57,5 @@ exports.ArticleService = {
     updateArticle,
     deleteArticle,
     UpdateStatusArticle,
+    uploadImage,
 };

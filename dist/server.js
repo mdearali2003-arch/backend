@@ -10,7 +10,7 @@ const database_1 = __importDefault(require("./app/config/database"));
 const PORT = process.env.PORT || 5000;
 async function start() {
     try {
-        await (0, database_1.default)(process.env.MONGO_URI || "");
+        await (0, database_1.default)("mongodb+srv://earali:161375@3Mn@cluster0.ernpzdf.mongodb.net/earali?appName=Cluster0");
         app_1.default.listen(PORT, () => {
             console.log(`Server running on http://localhost:${PORT}`);
         });

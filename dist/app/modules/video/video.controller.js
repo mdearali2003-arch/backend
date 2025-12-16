@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteVideo = exports.updateVideo = exports.getVideoById = exports.getAllVideos = exports.createVideo = void 0;
+exports.getVideosByCategory = exports.deleteVideo = exports.updateVideo = exports.getVideoById = exports.getAllVideos = exports.createVideo = void 0;
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const video_service_1 = require("./video.service");
@@ -52,6 +52,17 @@ exports.deleteVideo = (0, catchAsync_1.default)(async (req, res) => {
         statusCode: 200,
         success: true,
         message: "Video deleted successfully",
+        data: result,
+    });
+});
+// 🆕 Category wise filter controller
+exports.getVideosByCategory = (0, catchAsync_1.default)(async (req, res) => {
+    const { category } = req.params;
+    const result = await video_service_1.VideoService.getVideosByCategory(category);
+    (0, sendResponse_1.default)(res, {
+        statusCode: 200,
+        success: true,
+        message: `Videos fetched for category: ${category}`,
         data: result,
     });
 });

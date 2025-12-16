@@ -32,17 +32,30 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ArticleRoutes = void 0;
 const express_1 = require("express");
 const controller = __importStar(require("./article.controller"));
 const validateRequest_1 = require("../../middlewares/validateRequest");
 const article_validation_1 = require("./article.validation");
+const multer_1 = __importDefault(require("multer"));
+const path_1 = __importDefault(require("path"));
 const router = (0, express_1.Router)();
+// Multer config
+const storage = multer_1.default.diskStorage({
+    destination: path_1.default.join(__dirname, "../../../uploads"),
+    filename: (_req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+});
+const upload = (0, multer_1.default)({ storage });
 // Draft
 router.post("/draft", (0, validateRequest_1.validateRequest)(article_validation_1.createDraftSchema), controller.saveDraft);
 // Publish
 router.post("/publish", (0, validateRequest_1.validateRequest)(article_validation_1.publishArticleSchema), controller.publishArticle);
+// Upload image
+router.post("/upload/:id", upload.single("image"), controller.uploadArticleImage);
 // Get all
 router.get("/", controller.getAllArticles);
 router.get("/published", controller.getAllPublishedArticles);

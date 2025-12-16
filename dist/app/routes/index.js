@@ -7,6 +7,8 @@ const video_route_1 = require("../modules/video/video.route");
 const article_route_1 = require("../modules/articles/article.route");
 const user_route_1 = require("../modules/user/user.route");
 const auth_route_1 = require("../modules/auth/auth.route");
+const upload_route_1 = require("../modules/upload/upload.route");
+const imageGallery_route_1 = require("../modules/imageGallery/imageGallery.route");
 const router = (0, express_1.Router)();
 const moduleRoutes = [
     {
@@ -32,6 +34,14 @@ const moduleRoutes = [
     {
         path: "/auth",
         route: auth_route_1.AuthRoutes,
+    },
+    {
+        path: "/upload",
+        route: upload_route_1.UploadRoutes,
+    },
+    {
+        path: "/image-gallery",
+        route: imageGallery_route_1.ImageGalleryRoutes,
     },
 ];
 moduleRoutes.forEach((route) => {

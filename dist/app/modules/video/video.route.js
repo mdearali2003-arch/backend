@@ -44,4 +44,5 @@ router.get("/", controller.getAllVideos);
 router.get("/:id", controller.getVideoById);
 router.patch("/:id", (0, validateRequest_1.validateRequest)(video_validation_1.updateVideoSchema), controller.updateVideo);
 router.delete("/:id", controller.deleteVideo);
+router.get("/category/:category", controller.getVideosByCategory);
 exports.VideoRouter = router;
