@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 async function start() {
   try {
-    await connectDB(process.env.MONGO_URI || "");
+    await connectDB("mongodb+srv://earali:161375@3Mn@cluster0.ernpzdf.mongodb.net/earali?appName=Cluster0" );
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
